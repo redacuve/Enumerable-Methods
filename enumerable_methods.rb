@@ -111,7 +111,7 @@ module Enumerable
       to_enum(:my_map)
     end
   end
-  
+
   # rubocop:disable Metrics/MethodLength
   def my_inject(cont = nil, symb = nil)
     if (cont.is_a? Symbol) || (symb.is_a? Symbol)
@@ -161,4 +161,4 @@ def multiply_els(arr)
 end
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
+# rubocop:enable Metrics/MethodLength
