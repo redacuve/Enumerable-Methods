@@ -36,43 +36,38 @@ module Enumerable
   def my_all?
     if block_given?
       my_each { |elem| return false unless yield(elem) }
-      true
     else
       my_each { |elem| return false unless elem }
-      true
     end
+    true
   end
 
   def my_any?
     if block_given?
       my_each { |elem| return true if yield(elem) }
-      false
     else
       my_each { |elem| return true if elem }
-      false
     end
+    false
   end
 
   def my_none?
     if block_given?
       my_each { |elem| return false if yield(elem) }
-      true
     else
       my_each { |elem| return false if elem }
-      true
     end
+    true
   end
 
   def my_count
+    c = 0
     if block_given?
-      c = 0
       my_each { |elem| c += 1 if yield(elem) }
-      c
     else
-      c = 0
       my_each { | | c += 1 }
-      c
     end
+    c
   end
 
   def my_map(proc = nil)
