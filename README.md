@@ -1,6 +1,6 @@
 <!-- Project Header -->
 <p align="center">
-  <img src="" alt="Ennumerable methods logo" height="100" >
+  <img src="https://lh3.googleusercontent.com/mdRhT50Vs2DXu4kui46G6m_rzgm6imlW7ptLHgWzoQpf02lB4CNyuU2OF-efTvkPDJGfX-T0hBQQqH8DnT4zP6qbEuFuBsIPGXzBQO0q5caGSXeZKpaLmn5tc-qHytHM-Iw6MRFXPg=w1122-h631-no" alt="Ennumerable methods logo" height="100" >
   <br>
   <h2 align="center">Ruby Section</h2>
   <h3 align="center">Solo Project</h3>
