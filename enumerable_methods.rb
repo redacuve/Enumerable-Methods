@@ -7,7 +7,7 @@ module Enumerable
         i += 1
       end
     else
-      "No block given"
+      'No block given'
     end
   end
 
@@ -19,7 +19,7 @@ module Enumerable
         i += 1
       end
     else
-      "No block given"
+      'No block given'
     end
   end
 
@@ -28,7 +28,7 @@ module Enumerable
     if block_given?
       self.my_each{|elem| ary.push(elem) if yield(elem)}
     else
-      "No block given"
+      'No block given'
     end
     return ary
   end
@@ -135,7 +135,7 @@ module Enumerable
       }
       return c
     else
-      "No block Given (LocalJumpError)"
+      'No block Given (LocalJumpError)'
     end
   end
 end
