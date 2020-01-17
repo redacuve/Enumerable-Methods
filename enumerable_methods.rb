@@ -26,63 +26,39 @@ module Enumerable
   def my_select
     ary = []
     if block_given?
-      self.my_each{|elem| ary.push(elem) if yield(elem)}
+      self.my_each { |elem| ary.push(elem) if yield(elem) }
     else
       'No block given'
     end
-    return ary
+    ary
   end
 
   def my_all?
     if block_given?
-      self.my_each{|elem|
-        unless yield(elem)
-            return false
-        end
-      }
+      my_each { |elem| return false unless yield(elem) }
       return true
     else
-      self.my_each{|elem|
-        unless elem
-          return false
-        end
-      }
+      my_each { |elem| return false unless elem }
       return true
     end
   end
 
   def my_any?
     if block_given?
-      self.my_each{|elem|
-        if yield(elem)
-          return true
-        end
-      }
+      my_each { |elem| return true if yield(elem) }
      return false
     else
-      self.my_each{|elem|
-        if elem
-          return true
-        end
-      }
+      my_each { |elem| return true if elem }
       return false
     end
   end
 
   def my_none?
     if block_given?
-      self.my_each{|elem|
-        if yield(elem)
-          return false
-        end
-      }
+      my_each { |elem| return false if yield(elem) }
       return true
     else
-      self.my_each{|elem|
-        if elem
-          return false
-        end
-      }
+      my_each { |elem| return false if elem }
       return true
     end
   end
@@ -90,17 +66,11 @@ module Enumerable
   def my_count
     if block_given?
       c = 0
-      self.my_each{|elem|
-        if yield(elem)
-          c += 1
-        end
-      }
+      my_each { |elem| c += 1 if yield(elem) }
       return c
     else
       c = 0
-      self.my_each{|elem|
-        c += 1
-      }
+      my_each { |elem| c += 1 }
       return c
     end
   end
@@ -108,15 +78,11 @@ module Enumerable
   def my_map(proc = nil)
     if proc
       ary = []
-      self.my_each{|elem|
-        ary.push(proc.call(elem))
-      }
+      my_each { |elem| ary.push(proc.call(elem)) }
       return ary
     elsif block_given?
       ary = []
-      self.my_each{|elem|
-        ary.push(yield(elem))
-      }
+      my_each { |elem| ary.push(yield(elem)) }
       return ary
     else
       return to_enum(:my_map)
@@ -130,10 +96,8 @@ module Enumerable
       else
         c = 0
       end
-      self.my_each{|elem|
-        c = yield(c,elem)
-      }
-      return c
+      my_each { |elem| c = yield(c, elem) }
+      c
     else
       'No block Given (LocalJumpError)'
     end
@@ -141,5 +105,7 @@ module Enumerable
 end
 
 def multiply_els(arr)
-  arr.my_inject(1){|product, element| product * element}
+  arr.my_inject(1) { |product, element| product * element }
 end
+
+puts multiply_els([2,4,5])
