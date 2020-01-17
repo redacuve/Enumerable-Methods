@@ -33,13 +33,11 @@ module Enumerable
     end
   end
 
-  def my_all?(pattern=nil)
-    if pattern
-      if pattern.is_a? Regexp
-        my_each { |elem | return false unless elem =~ pattern }
-      else
-        my_each { |elem | return false unless elem.is_a? pattern }
-      end
+  def my_all?(pattern = nil)
+    if pattern.is_a? Regexp
+      my_each { |elem| return false unless elem =~ pattern }
+    elsif pattern
+      my_each { |elem| return false unless elem.is_a? pattern }
     elsif block_given?
       my_each { |elem| return false unless yield(elem) }
     else
