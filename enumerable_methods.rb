@@ -33,8 +33,8 @@ module Enumerable
       to_enum(:my_select)
     end
   end
-
-  def my_all?(pattern = nil)# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
+  def my_all?(pattern = nil)
     if pattern
       if pattern.is_a? Regexp
         my_each { |elem| return false unless elem =~ pattern }
@@ -153,7 +153,8 @@ module Enumerable
     end
   end
 end
-# rubocop:enable Metrics/ModuleLength
+
 def multiply_els(arr)
   arr.my_inject(1) { |product, element| product * element }
 end
+# rubocop:enable Metrics/ModuleLength
