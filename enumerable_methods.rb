@@ -65,7 +65,7 @@ module Enumerable
     if block_given?
       my_each { |elem| c += 1 if yield(elem) }
     else
-      my_each { | | c += 1 }
+      my_each { c += 1 }
     end
     c
   end
