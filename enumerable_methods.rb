@@ -84,9 +84,11 @@ module Enumerable
     true
   end
 
-  def my_count
+  def my_count(arg = nil)
     c = 0
-    if block_given?
+    if arg
+      my_each { |elem| c += 1 if elem == arg }
+    elsif block_given?
       my_each { |elem| c += 1 if yield(elem) }
     else
       my_each { c += 1 }
@@ -108,13 +110,45 @@ module Enumerable
     end
   end
 
-  def my_inject(cont = nil)
-    if block_given?
+  def my_inject(cont = nil, symb = nil)
+    if (cont.is_a? Symbol) || (symb.is_a? Symbol)
+      if cont.is_a? Symbol
+        case cont 
+          when :+
+            c = 0
+            my_each { |elem| c = c + elem }
+          when :-
+            c = self[0]
+            self[1..-1].my_each { |elem| c = c - elem }
+          when :*
+            c = self[0]
+            self[1..-1].my_each { |elem| c = c * elem }
+          when :/
+            c = self[0]
+            self[1..-1].my_each { |elem| c = c / elem }
+        end        
+        c
+      elsif (cont.is_a? Numeric)
+        case symb
+          when :+
+            my_each { |elem| cont = cont + elem }
+          when :-
+            my_each { |elem| cont = cont - elem }
+          when :*
+            my_each { |elem| cont = cont * elem }
+          when :/
+            my_each { |elem| cont = cont / elem }
+        end        
+        cont
+      else
+        "undefined method for #{cont}:#{cont.class}"
+      end
+    elsif block_given?
       cont ||= 0
       my_each { |elem| cont = yield(cont, elem) }
       cont
     else
-      'No block Given (LocalJumpError)'
+      'no block given (LocalJumpError)'
     end
   end
 end
