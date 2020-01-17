@@ -7,7 +7,7 @@ module Enumerable
         i += 1
       end
     else
-      'No block given'
+      to_enum(:my_each)
     end
   end
 
@@ -19,7 +19,7 @@ module Enumerable
         i += 1
       end
     else
-      'No block given'
+      to_enum(:my_each_with_index)
     end
   end
 
@@ -27,10 +27,10 @@ module Enumerable
     ary = []
     if block_given?
       my_each { |elem| ary.push(elem) if yield(elem) }
+      ary
     else
-      'No block given'
+      to_enum(:my_select)
     end
-    ary
   end
 
   def my_all?
