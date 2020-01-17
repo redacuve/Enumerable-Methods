@@ -86,11 +86,7 @@ module Enumerable
 
   def my_inject(param = nil)
     if block_given?
-      if param
-        c = param
-      else
-        c = 0
-      end
+      c = param ? param : 0
       my_each { |elem| c = yield(c, elem) }
       c
     else
