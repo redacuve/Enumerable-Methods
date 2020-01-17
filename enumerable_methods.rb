@@ -113,32 +113,32 @@ module Enumerable
   def my_inject(cont = nil, symb = nil)
     if (cont.is_a? Symbol) || (symb.is_a? Symbol)
       if cont.is_a? Symbol
-        case cont 
-          when :+
-            c = 0
-            my_each { |elem| c = c + elem }
-          when :-
-            c = self[0]
-            self[1..-1].my_each { |elem| c = c - elem }
-          when :*
-            c = self[0]
-            self[1..-1].my_each { |elem| c = c * elem }
-          when :/
-            c = self[0]
-            self[1..-1].my_each { |elem| c = c / elem }
-        end        
+        case cont
+        when :+
+          c = 0
+          my_each { |elem| c += elem }
+        when :-
+          c = self[0]
+          self[1..-1].my_each { |elem| c -= elem }
+        when :*
+          c = self[0]
+          self[1..-1].my_each { |elem| c *= elem }
+        when :/
+          c = self[0]
+          self[1..-1].my_each { |elem| c /= elem }
+        end
         c
-      elsif (cont.is_a? Numeric)
+      elsif cont.is_a? Numeric
         case symb
-          when :+
-            my_each { |elem| cont = cont + elem }
-          when :-
-            my_each { |elem| cont = cont - elem }
-          when :*
-            my_each { |elem| cont = cont * elem }
-          when :/
-            my_each { |elem| cont = cont / elem }
-        end        
+        when :+
+          my_each { |elem| cont += elem }
+        when :-
+          my_each { |elem| cont -= elem }
+        when :*
+          my_each { |elem| cont *= elem }
+        when :/
+          my_each { |elem| cont /= elem }
+        end
         cont
       else
         "undefined method for #{cont}:#{cont.class}"
