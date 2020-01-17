@@ -84,11 +84,11 @@ module Enumerable
     end
   end
 
-  def my_inject(c = nil)
+  def my_inject(cont = nil)
     if block_given?
-      c ||= 0
-      my_each { |elem| c = yield(c, elem) }
-      c
+      cont ||= 0
+      my_each { |elem| cont = yield(cont, elem) }
+      cont
     else
       'No block Given (LocalJumpError)'
     end
