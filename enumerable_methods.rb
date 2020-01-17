@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     if block_given?
       i = 0
-      while i < self.length
+      while i < length
         yield(self[i])
         i += 1
       end
@@ -14,7 +14,7 @@ module Enumerable
   def my_each_with_index
     if block_given?
       i = 0
-      while i < self.length
+      while i < length
         yield(self[i], i)
         i += 1
       end
@@ -26,7 +26,7 @@ module Enumerable
   def my_select
     ary = []
     if block_given?
-      self.my_each { |elem| ary.push(elem) if yield(elem) }
+      my_each { |elem| ary.push(elem) if yield(elem) }
     else
       'No block given'
     end
@@ -36,30 +36,30 @@ module Enumerable
   def my_all?
     if block_given?
       my_each { |elem| return false unless yield(elem) }
-      return true
+      true
     else
       my_each { |elem| return false unless elem }
-      return true
+      true
     end
   end
 
   def my_any?
     if block_given?
       my_each { |elem| return true if yield(elem) }
-     return false
+      false
     else
       my_each { |elem| return true if elem }
-      return false
+      false
     end
   end
 
   def my_none?
     if block_given?
       my_each { |elem| return false if yield(elem) }
-      return true
+      true
     else
       my_each { |elem| return false if elem }
-      return true
+      true
     end
   end
 
@@ -67,11 +67,11 @@ module Enumerable
     if block_given?
       c = 0
       my_each { |elem| c += 1 if yield(elem) }
-      return c
+      c
     else
       c = 0
-      my_each { |elem| c += 1 }
-      return c
+      my_each { | | c += 1 }
+      c
     end
   end
 
@@ -79,13 +79,13 @@ module Enumerable
     if proc
       ary = []
       my_each { |elem| ary.push(proc.call(elem)) }
-      return ary
+      ary
     elsif block_given?
       ary = []
       my_each { |elem| ary.push(yield(elem)) }
-      return ary
+      ary
     else
-      return to_enum(:my_map)
+      to_enum(:my_map)
     end
   end
 
@@ -107,5 +107,3 @@ end
 def multiply_els(arr)
   arr.my_inject(1) { |product, element| product * element }
 end
-
-puts multiply_els([2,4,5])
