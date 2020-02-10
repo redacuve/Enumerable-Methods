@@ -159,6 +159,8 @@ end
 def multiply_els(arr)
   arr.my_inject(1) { |product, element| product * element }
 end
+
+arr = [1,2,3,4,5]
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
